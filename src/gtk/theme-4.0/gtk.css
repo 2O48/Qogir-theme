@@ -8790,3 +8790,6 @@ dialog-host > dialog.osd:not(progressbar):not(button):not(menubutton):not(splitb
 @define-color BLACK_500 #393634;
 @define-color BLACK_700 #33302F;
 @define-color BLACK_900 #2B2928;
+
+/* Extend the close button hit area to the right window edge. */
+headerbar windowcontrols > button.close { margin-right: 0; }

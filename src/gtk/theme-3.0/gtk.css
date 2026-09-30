@@ -11261,3 +11261,30 @@ window > hdyleaflet > scrolledwindow > viewport.frame > list > row.activatable .
 @define-color BLACK_500 #393634;
 @define-color BLACK_700 #33302F;
 @define-color BLACK_900 #2B2928;
+
+/* Extend the close button hit area to the right window edge. */
+headerbar { padding-right: 0; }
+headerbar:not(.csd).default-decoration { padding-right: 0; }
+/* Expand the hit area while keeping the Muffin icon centered in its old position. */
+headerbar:not(.csd).default-decoration > button.titlebutton,
+headerbar.default-decoration > button.titlebutton {
+  margin: 0;
+  padding: 0 3px;
+}
+headerbar button.titlebutton.close,
+.titlebar button.titlebutton.close,
+headerbar.default-decoration > button.titlebutton.close { margin-right: 0; }
+/* Keep Muffin's enlarged hit area, but paint the original 26px circular feedback. */
+headerbar:not(.csd).default-decoration > button.titlebutton.close {
+  background-size: 26px 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+headerbar:not(.csd).default-decoration > button.titlebutton.close:hover {
+  background-color: transparent;
+  background-image: radial-gradient(circle closest-side at center, #d7787d 99%, transparent 100%);
+}
+headerbar:not(.csd).default-decoration > button.titlebutton.close:active {
+  background-color: transparent;
+  background-image: radial-gradient(circle closest-side at center, #ae4a4f 99%, transparent 100%);
+}
