@@ -4841,11 +4841,6 @@ headerbar {
   @extend %csd_titlebutton;
 }
 
-// Keep the right-hand close button's hit area flush with the window edge.
-@if $titlebutton == 'circle' {
-  headerbar windowcontrols > button.close { margin-right: 0; }
-}
-
 // catch all extend
 %selected_items {
   background-color: $selected_bg_color;

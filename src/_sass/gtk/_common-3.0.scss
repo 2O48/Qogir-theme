@@ -3989,45 +3989,48 @@ headerbar, .titlebar {
   @extend %csd_titlebutton;
 }
 
-// Keep the right-hand close button's hit area flush with the window edge.
+// Muffin uses the button rectangle as its hit area. Keep the original 8px
+// headerbar inset and button centers, but extend the transparent rectangle
+// into the side margins. The 26px icon and hover circle stay in place.
 @if $titlebutton == 'circle' {
-  headerbar {
-    padding-right: 0;
+  headerbar:not(.csd).default-decoration {
+    padding: 0 8px;
 
-    &:not(.csd).default-decoration { padding-right: 0; }
-
-    // Muffin centers the icon inside the button rectangle. Expand that
-    // rectangle by 3px on each side while keeping its center in place.
-    &:not(.csd).default-decoration > button.titlebutton,
-    &.default-decoration > button.titlebutton {
-      margin: 0;
-      padding: 0 3px;
+    > button.titlebutton {
+      margin: 0 -9px;
+      padding: 0 12px;
+      background-size: 26px 26px;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    button.titlebutton.close { margin-right: 0; }
+    > button.titlebutton.close {
+      &:hover {
+        background-color: transparent;
+        background-image: radial-gradient(circle closest-side at center,
+                                          $wm_button_close_hover_bg 99%, transparent 100%);
+      }
 
-    &.default-decoration > button.titlebutton.close { margin-right: 0; }
-  }
-
-  .titlebar button.titlebutton.close { margin-right: 0; }
-
-  // Muffin renders the hover background over the enlarged clickable rectangle.
-  // Paint the old 26px circle in its center, leaving the extra hit area clear.
-  headerbar:not(.csd).default-decoration > button.titlebutton.close {
-    background-size: 26px 26px;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    &:hover {
-      background-color: transparent;
-      background-image: radial-gradient(circle closest-side at center,
-                                        $wm_button_close_hover_bg 99%, transparent 100%);
+      &:active {
+        background-color: transparent;
+        background-image: radial-gradient(circle closest-side at center,
+                                          $wm_button_close_active_bg 99%, transparent 100%);
+      }
     }
 
-    &:active {
-      background-color: transparent;
-      background-image: radial-gradient(circle closest-side at center,
-                                        $wm_button_close_active_bg 99%, transparent 100%);
+    > button.titlebutton.maximize,
+    > button.titlebutton.minimize {
+      &:hover {
+        background-color: transparent;
+        background-image: radial-gradient(circle closest-side at center,
+                                          rgba($header_fg, 0.1) 99%, transparent 100%);
+      }
+
+      &:active {
+        background-color: transparent;
+        background-image: radial-gradient(circle closest-side at center,
+                                          rgba($header_fg, 0.2) 99%, transparent 100%);
+      }
     }
   }
 }
